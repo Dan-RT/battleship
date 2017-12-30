@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		65958ABE1FF3D96A00C0DACB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 65958ABD1FF3D96A00C0DACB /* main.c */; };
+		65958AC61FF3DA0500C0DACB /* tab_functions.c in Sources */ = {isa = PBXBuildFile; fileRef = 65958AC41FF3DA0500C0DACB /* tab_functions.c */; };
+		65958ACC1FF3DF0000C0DACB /* inputs.c in Sources */ = {isa = PBXBuildFile; fileRef = 65958ACA1FF3DF0000C0DACB /* inputs.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,11 @@
 /* Begin PBXFileReference section */
 		65958ABA1FF3D96A00C0DACB /* Battleship */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Battleship; sourceTree = BUILT_PRODUCTS_DIR; };
 		65958ABD1FF3D96A00C0DACB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		65958AC41FF3DA0500C0DACB /* tab_functions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tab_functions.c; sourceTree = "<group>"; };
+		65958AC51FF3DA0500C0DACB /* tab_functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tab_functions.h; sourceTree = "<group>"; };
+		65958AC81FF3DAF800C0DACB /* structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = structures.h; sourceTree = "<group>"; };
+		65958ACA1FF3DF0000C0DACB /* inputs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inputs.c; sourceTree = "<group>"; };
+		65958ACB1FF3DF0000C0DACB /* inputs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputs.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,11 @@
 			isa = PBXGroup;
 			children = (
 				65958ABD1FF3D96A00C0DACB /* main.c */,
+				65958AC41FF3DA0500C0DACB /* tab_functions.c */,
+				65958AC51FF3DA0500C0DACB /* tab_functions.h */,
+				65958AC81FF3DAF800C0DACB /* structures.h */,
+				65958ACA1FF3DF0000C0DACB /* inputs.c */,
+				65958ACB1FF3DF0000C0DACB /* inputs.h */,
 			);
 			path = Battleship;
 			sourceTree = "<group>";
@@ -119,7 +131,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65958ACC1FF3DF0000C0DACB /* inputs.c in Sources */,
 				65958ABE1FF3D96A00C0DACB /* main.c in Sources */,
+				65958AC61FF3DA0500C0DACB /* tab_functions.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
