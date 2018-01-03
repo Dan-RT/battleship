@@ -27,5 +27,12 @@ struct ship {
     int life;
 };
 
+typedef struct player player ;
+struct player {
+    char* name;
+    int winner;
+    int ip_address;
+};
+
 
 #endif /* structures_h */

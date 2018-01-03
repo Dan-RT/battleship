@@ -89,7 +89,6 @@ int validate_input_pattern(char input_location [3]) {
     if (input_location[0] < 65 || input_location[0] > 74) {
         if (input_location[0] < 97 || input_location[0] > 106) {
             printf("Please respect the pattern \"A1\" (Char - Integer).\n");
-            //printf("Incorrect char input : %s", input_location);
             return 0;
         }
     }
@@ -97,7 +96,6 @@ int validate_input_pattern(char input_location [3]) {
     if (input_location[1] < 48 || input_location[1] > 58) {
         
         printf("Please respect the pattern \"A1\" (Char - Integer).\n");
-        //printf("Incorrect integer input : %s", input_location);
         return 0;
     }
     
@@ -115,7 +113,7 @@ int validate_location (char tab[10][10], coordinates boat, char boat_type) {
     
     if (empty_location_validation(tab, boat)) {
         for (i = 0; i < 4; i++) {
-            if (logical_location_validation(tab, boat, boat_type, give_boat_size(boat_type), i+1) == 0) {
+            if (logical_location_validation(tab, boat, give_boat_size(boat_type), 0, i+1) == 0) {
                 //Comme on est sur du récursif ici on regarde si on est bien resté à 0 pour valider, et non pas 1 comme avant
                 orientation[i] = 1;
                 flag = 1;
@@ -130,16 +128,16 @@ int validate_location (char tab[10][10], coordinates boat, char boat_type) {
             if (orientation[i] == 1) {
                 switch (i) {
                     case 0:
-                        printf("1 - Horizontal East-orientation avalaible.\n");
+                        printf("1 - Vertical South-orientation avalaible.\n");
                         break;
                     case 1:
-                        printf("2 - Horizontal West-orientation avalaible.\n");
+                        printf("2 - Vertical North-orientation avalaible.\n");
                         break;
                     case 2:
-                        printf("3 - Vertical North-orientation avalaible.\n");
+                        printf("3 - Horizontal East-orientation avalaible.\n");
                         break;
                     case 3:
-                        printf("4 - Vertical South-orientation avalaible.\n");
+                        printf("4 - Horizontal West-orientation avalaible.\n");
                         break;
                 }
             }
@@ -152,20 +150,20 @@ int validate_location (char tab[10][10], coordinates boat, char boat_type) {
         for (i = 0; i < give_boat_size(boat_type); i++) {
             switch (choice) {
                 case 1:
-                    boat.x++;
                     fill_tab(tab, boat, boat_type);
+                    boat.x++;
                     break;
                 case 2:
-                    boat.x--;
                     fill_tab(tab, boat, boat_type);
+                    boat.x--;
                     break;
                 case 3:
-                    boat.y++;
                     fill_tab(tab, boat, boat_type);
+                    boat.y++;
                     break;
                 case 4:
-                    boat.y--;
                     fill_tab(tab, boat, boat_type);
+                    boat.y--;
                     break;
             }
         }

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Battleship/inputs.c"
-            timestampString = "536367732.5073"
+            timestampString = "536524176.764204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "validation()"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "validate_location()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Battleship/inputs.c"
-            timestampString = "536368740.402248"
+            filePath = "Battleship/main.c"
+            timestampString = "536541275.80439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "validate_location()"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "play()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

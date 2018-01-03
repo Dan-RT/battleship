@@ -26,6 +26,8 @@ void display_tab(char tab[10][10]) {
     char letter = 'A';
     
     printf("\n\n");
+    printf("----------------------------------------------------------------");
+    printf("\n\n\n");
     
     printf("  |0|1|2|3|4|5|6|7|8|9|\n");
     
@@ -39,7 +41,7 @@ void display_tab(char tab[10][10]) {
         printf("|\n");
     }
     
-    printf("\n\n");
+    printf("\n");
 }
 
 void fill_tab(char tab[10][10], coordinates boat, char boat_type) {
@@ -85,34 +87,41 @@ int logical_location_validation (char tab[10][10], coordinates boat, int boat_si
     
     int i = 0, j = 0;
     
+    
+    
     if (depth != boat_size) {
-        for(i = 0; i < 10; i++) {
-            for(j = 0; j < 10; j++) {
-                if (i == boat.x && j == boat.y) {
-                    switch (check_type) {
-                        case 1:
-                            boat.x++;
-                            depth++;
-                            return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                            break;
-                        case 2:
-                            boat.x--;
-                            depth++;
-                            return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                            break;
-                        case 3:
-                            boat.y++;
-                            depth++;
-                            return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                            break;
-                        case 4:
-                            boat.y--;
-                            depth++;
-                            return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                            break;
-                        default:
-                            return 1;
-                            break;
+        if (boat.x < 0 || boat.y < 0 || boat.x > 9 || boat.y > 9 ) {
+            //Pour éviter qu'on autorise un bateau hors du tableau
+            return 1;
+        } else {
+            for(i = 0; i < 10; i++) {
+                for(j = 0; j < 10; j++) {
+                    if (i == boat.x && j == boat.y) {
+                        switch (check_type) {
+                            case 1:
+                                boat.x++;
+                                depth++;
+                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                break;
+                            case 2:
+                                boat.x--;
+                                depth++;
+                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                break;
+                            case 3:
+                                boat.y++;
+                                depth++;
+                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                break;
+                            case 4:
+                                boat.y--;
+                                depth++;
+                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                break;
+                            default:
+                                return 1;
+                                break;
+                        }
                     }
                 }
             }

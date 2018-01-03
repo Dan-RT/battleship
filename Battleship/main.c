@@ -14,8 +14,11 @@
 
 
 int fill_main_board (char board[10][10]);
+int play();
 
 int main(int argc, const char * argv[]) {
+    
+    play();
     
     char main_board[10][10];
     //char mark_board[10][10];
@@ -24,6 +27,8 @@ int main(int argc, const char * argv[]) {
     display_tab(main_board);
     
     fill_main_board(main_board);
+    
+    
     
     return 0;
 }
@@ -57,6 +62,39 @@ int fill_main_board (char board[10][10]) {
     
     return 0;
 }
+
+
+
+int play () {
+    
+    player player1, player2;
+    int alternance = 0;
+    
+    while (1) {
+        if (alternance % 2 == 0) {
+            
+        } else {
+            
+        }
+        alternance++;
+    }
+    
+    
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
