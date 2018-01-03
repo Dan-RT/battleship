@@ -17,7 +17,8 @@ int validate_input_pattern(char input_location [3]);
 int convert_ascii_to_table_index (char input);
 int read_string (char* output, char* data, int size);
 void empty_buffer ();
-int validate_location (char tab[10][10], coordinates boat, char boat_type);
-int validation (char tab[10][10], char input_location [3], coordinates* coor, char boat_type);
+int validate_fill_location (char tab[10][10], coordinates boat, char boat_type);
+int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type);
+int validation_shoot(char tab[10][10], char input_location [3], coordinates* coor);
 
 #endif /* inputs_h */

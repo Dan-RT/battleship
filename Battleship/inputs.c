@@ -64,7 +64,7 @@ int read_string (char* output, char* data, int size)
     return 0;
 }
 
-int validation (char tab[10][10], char input_location [3], coordinates* coor, char boat_type) {
+int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type) {
     
     if (validate_input_pattern(input_location)) {
         
@@ -73,7 +73,7 @@ int validation (char tab[10][10], char input_location [3], coordinates* coor, ch
         
         printf("\nCoordinates : %d, %d.\n", coor->x, coor->y);
         
-        if (validate_location(tab, *coor, boat_type)) {
+        if (validate_fill_location(tab, *coor, boat_type)) {
             return 1;
         } else {
             return 0;
@@ -102,7 +102,7 @@ int validate_input_pattern(char input_location [3]) {
     return 1;
 }
 
-int validate_location (char tab[10][10], coordinates boat, char boat_type) {
+int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) {
     
     int i = 0, flag = 0, choice = 0;
     int orientation[4];
@@ -174,7 +174,19 @@ int validate_location (char tab[10][10], coordinates boat, char boat_type) {
 }
 
 
-
+int validation_shoot (char tab[10][10], char input_location [3], coordinates* coor) {
+    
+    if (validate_input_pattern(input_location)) {
+        
+        coor->x = convert_ascii_to_table_index(input_location[0]);
+        coor->y = input_location[1] - 48;
+        
+        printf("\nCoordinates : %d, %d.\n", coor->x, coor->y);
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
 
 

@@ -8,6 +8,7 @@
 
 #include "tab_functions.h"
 #include "structures.h"
+#include <ctype.h>
 
 void initialiaze_tab(char tab[10][10]) {
  
@@ -20,14 +21,19 @@ void initialiaze_tab(char tab[10][10]) {
     }
 }
 
-void display_tab(char tab[10][10]) {
+void display_tab(char tab[10][10], char* ouptut, int separation) {
     
     int i = 0, j = 0;
     char letter = 'A';
     
     printf("\n\n");
-    printf("----------------------------------------------------------------");
-    printf("\n\n\n");
+    if (separation) {
+        printf("----------------------------------------------------------------");
+        printf("\n\n\n");
+    }
+    
+    printf("%s", ouptut);
+    printf("\n");
     
     printf("  |0|1|2|3|4|5|6|7|8|9|\n");
     
@@ -44,22 +50,29 @@ void display_tab(char tab[10][10]) {
     printf("\n");
 }
 
-void fill_tab(char tab[10][10], coordinates boat, char boat_type) {
+int fill_tab(char tab[10][10], coordinates boat, char boat_type) {
 
-    int i = 0, j = 0, flag = 0;
+    int i = 0, j = 0;
     
     for(i = 0; i < 10; i++) {
         for(j = 0; j < 10; j++) {
             if (i == boat.x && j == boat.y) {
-                tab[i][j] = boat_type;
-                flag = 1;
-                break;
+                if (tab[i][j] == '-') {
+                    if (boat_type != ' ') {
+                        tab[i][j] = boat_type;
+                    }
+                    return 0;
+                } else if (tab[i][j] != 'X' && tab[i][j] != 'x') {
+                    tab[i][j] = tolower(tab[i][j]);
+                    return 1;
+                } else {
+                    printf("fill_tab last else used");
+                    return 0;
+                }
             }
         }
-        if (flag) {
-            break;
-        }
     }
+    return 0;
 }
 
 

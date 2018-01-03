@@ -14,8 +14,8 @@
 
 
 void initialiaze_tab(char tab[10][10]);
-void display_tab(char tab[10][10]);
-void fill_tab(char tab[10][10], coordinates boat, char boat_type);
+void display_tab(char tab[10][10], char* ouptut, int separation);
+int fill_tab(char tab[10][10], coordinates boat, char boat_type);
 void initialiaze_tab_ship (ship ships[10]);
 void display_tab_ship(ship ships[10]);
 char* give_boat_name(char code);
