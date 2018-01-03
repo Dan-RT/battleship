@@ -18,15 +18,25 @@ int play();
 
 int main(int argc, const char * argv[]) {
     
-    play();
+    //play();
     
     char main_board[10][10];
+    
+    
+    
     //char mark_board[10][10];
     
     initialiaze_tab(main_board);
     display_tab(main_board);
     
-    fill_main_board(main_board);
+    //fill_main_board(main_board);
+    
+    main_board[0][0] = 'C';
+    main_board[0][1] = 'C';
+    main_board[0][2] = 'C';
+    main_board[0][3] = 'C';
+    
+    display_tab(main_board);
     
     
     
