@@ -14,41 +14,72 @@
 
 
 int fill_main_board (char board[10][10]);
-int shoot_location (char board[10][10], char mark_board[10][10]);
-void display_boards(char board[10][10], char mark_board[10][10]);
-int play();
+int shoot_location (char board[10][10], char mark_board[10][10], int* lives);
+void display_boards(char board[10][10], char mark_board[10][10], char* name);
+int play (player* player1, player* player2);
+void get_names(char* name_1, char* name_2);
 
 int main(int argc, const char * argv[]) {
     
-    //play();
+    player* player1 = malloc(sizeof(player));
+    player* player2 = malloc(sizeof(player));
     
-    char main_board[10][10];
-    char mark_board[10][10];
+    player1->name = malloc(10*sizeof(char));
+    player2->name = malloc(10*sizeof(char));
     
-    initialiaze_tab(main_board);
-    initialiaze_tab(mark_board);
+    initialiaze_tab(player1->main_board);
+    initialiaze_tab(player1->mark_board);
+    initialiaze_tab(player2->main_board);
+    initialiaze_tab(player2->mark_board);
     
-    //fill_main_board(main_board);
+    //fill_main_board(player1->main_board);
+    //fill_main_board(player2->main_board);
     
-    main_board[0][0] = 'C';
-    main_board[0][1] = 'C';
-    main_board[0][2] = 'C';
-    main_board[0][3] = 'C';
-    main_board[0][4] = 'C';
+    player1->main_board[0][0] = 'C';
+    player1->main_board[0][1] = 'C';
+    player1->main_board[0][2] = 'C';
+    player1->main_board[0][3] = 'C';
+    player1->main_board[0][4] = 'C';
     
-    display_boards(main_board, mark_board);
+    player2->main_board[0][0] = 'C';
+    player2->main_board[0][1] = 'C';
+    player2->main_board[0][2] = 'C';
+    player2->main_board[0][3] = 'C';
+    player2->main_board[0][4] = 'C';
     
     printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
-    
-    while (1) {     //used for tests
-        shoot_location(main_board, mark_board);
-        
-        display_boards(main_board, mark_board);
-    }
+    get_names(player1->name, player2->name);
+    play(player1, player2);
     
     return 0;
 }
 
+
+
+int play (player* player1, player* player2) {
+    
+    int alternance = 0;
+    player1->lives = 30;
+    player2->lives = 30;
+    
+    
+    while (alternance < 10) {
+        if (alternance % 2 == 0) {
+            display_boards(player1->main_board, player1->mark_board, player1->name);
+            printf("\nNumber of lives : %d\n", player1->lives);
+            shoot_location(player2->main_board, player1->mark_board, &player2->lives);
+            //display_boards(player1->main_board, player1->mark_board, player1->name);
+        } else {
+            display_boards(player2->main_board, player2->mark_board, player2->name);
+            printf("\nNumber of lives : %d\n", player2->lives);
+            shoot_location(player1->main_board, player2->mark_board, &player1->lives);
+            //display_boards(player2->main_board, player2->mark_board, player2->name);
+        }
+        alternance++;
+    }
+    
+    return 0;
+}
 
 
 int fill_main_board (char board[10][10]) {
@@ -72,14 +103,20 @@ int fill_main_board (char board[10][10]) {
             check = validation_fill(board, input, coor, *give_boat_name(ships[i].code));
         } while (check == 0);
         check = 0;
-        
     }
     
     return 0;
 }
 
 
-int shoot_location (char board[10][10], char mark_board[10][10]) {
+void get_names(char* name_1, char* name_2) {
+    
+    read_string("\nEnter name Player 1 : ", name_1, 10);
+    read_string("\nEnter name Player 2 : ", name_2, 10);
+}
+
+
+int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
     
     char input[3];
     int check = 0;
@@ -93,6 +130,7 @@ int shoot_location (char board[10][10], char mark_board[10][10]) {
     if (fill_tab(board, *coor, ' ')) {
         fill_tab(mark_board, *coor, 'x');
         printf("Poum\n\n");
+        lives = lives - 1;
     } else {
         fill_tab(mark_board, *coor, 'X');
         printf("Dans l'eau\n\n");
@@ -102,30 +140,14 @@ int shoot_location (char board[10][10], char mark_board[10][10]) {
 }
 
 
-void display_boards(char board[10][10], char mark_board[10][10]) {
-    display_tab(board, "Main Board :", 1);
-    display_tab(mark_board, "Mark Board :", 0);
+void display_boards(char board[10][10], char mark_board[10][10], char* name) {
+    display_tab(board, "Main Board :", 1, name);
+    display_tab(mark_board, "Mark Board :", 0, name);
 }
 
 
 
 
-int play () {
-    
-    player player1, player2;
-    int alternance = 0;
-    
-    while (1) {
-        if (alternance % 2 == 0) {
-            
-        } else {
-            
-        }
-        alternance++;
-    }
-    
-    return 0;
-}
 
 
 

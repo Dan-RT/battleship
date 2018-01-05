@@ -29,7 +29,10 @@ struct ship {
 
 typedef struct player player ;
 struct player {
+    char main_board[10][10];
+    char mark_board[10][10];
     char* name;
+    int lives;
     int winner;
     int ip_address;
 };

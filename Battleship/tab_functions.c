@@ -21,7 +21,7 @@ void initialiaze_tab(char tab[10][10]) {
     }
 }
 
-void display_tab(char tab[10][10], char* ouptut, int separation) {
+void display_tab(char tab[10][10], char* ouptut, int separation, char* name) {
     
     int i = 0, j = 0;
     char letter = 'A';
@@ -32,6 +32,7 @@ void display_tab(char tab[10][10], char* ouptut, int separation) {
         printf("\n\n\n");
     }
     
+    printf("%s\n", name);
     printf("%s", ouptut);
     printf("\n");
     
