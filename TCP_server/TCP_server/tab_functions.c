@@ -6,9 +6,12 @@
 //  Copyright © 2017 Daniel Regnard. All rights reserved.
 //
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "tab_functions.h"
 #include "structures.h"
 #include <ctype.h>
+#include "inputs.h"
 
 void initialiaze_tab(char tab[10][10]) {
  
@@ -28,13 +31,11 @@ void display_tab(char tab[10][10], char* ouptut, int separation, char* name) {
     
     printf("\n\n");
     if (separation) {
-        printf("----------------------------------------------------------------");
-        printf("\n\n\n");
+        printf("----------------------------------------------------------------\n\n\n");
     }
     
     printf("%s\n", name);
-    printf("%s", ouptut);
-    printf("\n");
+    printf("%s\n", ouptut);
     
     printf("  |0|1|2|3|4|5|6|7|8|9|\n");
     
@@ -50,6 +51,65 @@ void display_tab(char tab[10][10], char* ouptut, int separation, char* name) {
     
     printf("\n");
 }
+
+void display_tab_to_be_send(char tab[10][10], char* ouptut, int separation, char* name, char* to_be_send) {
+    
+    int i = 0, j = 0;
+    char letter = 'A';
+    
+    sprintf(to_be_send,"\n\n");
+    
+    printf("\n\n");
+    if (separation) {
+        sprintf(to_be_send + strlen(to_be_send),"----------------------------------------------------------------\n\n\n");
+    }
+    
+    sprintf(to_be_send + strlen(to_be_send),"%s\n", name);
+    sprintf(to_be_send + strlen(to_be_send),"%s\n", ouptut);
+    
+    sprintf(to_be_send + strlen(to_be_send),"  |0|1|2|3|4|5|6|7|8|9|\n");
+    
+    for(i = 0; i < 10; i++) {
+        
+        sprintf(to_be_send + strlen(to_be_send),"|%c", letter);
+        
+        letter++;
+        for(j = 0; j < 10; j++) {
+            sprintf(to_be_send + strlen(to_be_send),"|%c", tab[i][j]);
+        }
+        sprintf(to_be_send + strlen(to_be_send),"|\n");
+    }
+    sprintf(to_be_send + strlen(to_be_send),"\n");
+}
+
+
+
+int fill_main_board (char board[10][10]) {
+    
+    ship ships[10];
+    char output[50];
+    char input[3];
+    int i = 0, check = 0;
+    coordinates* coor = malloc(sizeof(coordinates));
+    
+    initialiaze_tab_ship(ships);
+    display_tab_ship(ships);
+    
+    for (i = 0; i < 10; i++) {
+        do {
+            //permet de créer dans input une un string avec des variables dedans
+            snprintf(output, sizeof(output),
+                     "\n\nEnter coordinate for a %s : \n",
+                     give_boat_name(ships[i].code));
+            read_string(output, input, 3);
+            check = validation_fill(board, input, coor, *give_boat_name(ships[i].code));
+        } while (check == 0);
+        check = 0;
+    }
+    
+    return 0;
+}
+
 
 int fill_tab(char tab[10][10], coordinates boat, char boat_type) {
 
@@ -220,6 +280,10 @@ int give_boat_size(char code) {
 }
 
 
+void display_boards(char board[10][10], char mark_board[10][10], char* name) {
+    display_tab(board, "Main Board :", 1, name);
+    display_tab(mark_board, "Mark Board :", 0, name);
+}
 
 
 

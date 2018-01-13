@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		65958ABE1FF3D96A00C0DACB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 65958ABD1FF3D96A00C0DACB /* main.c */; };
-		65958AC61FF3DA0500C0DACB /* tab_functions.c in Sources */ = {isa = PBXBuildFile; fileRef = 65958AC41FF3DA0500C0DACB /* tab_functions.c */; };
-		65958ACC1FF3DF0000C0DACB /* inputs.c in Sources */ = {isa = PBXBuildFile; fileRef = 65958ACA1FF3DF0000C0DACB /* inputs.c */; };
+		6506567A2003740400645E9B /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 650656792003740400645E9B /* main.c */; };
+		650656882003762200645E9B /* connection.c in Sources */ = {isa = PBXBuildFile; fileRef = 650656862003762200645E9B /* connection.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		65958AB81FF3D96A00C0DACB /* CopyFiles */ = {
+		650656742003740300645E9B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -25,17 +24,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		65958ABA1FF3D96A00C0DACB /* Battleship */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Battleship; sourceTree = BUILT_PRODUCTS_DIR; };
-		65958ABD1FF3D96A00C0DACB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		65958AC41FF3DA0500C0DACB /* tab_functions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tab_functions.c; sourceTree = "<group>"; };
-		65958AC51FF3DA0500C0DACB /* tab_functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tab_functions.h; sourceTree = "<group>"; };
-		65958AC81FF3DAF800C0DACB /* structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = structures.h; sourceTree = "<group>"; };
-		65958ACA1FF3DF0000C0DACB /* inputs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inputs.c; sourceTree = "<group>"; };
-		65958ACB1FF3DF0000C0DACB /* inputs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputs.h; sourceTree = "<group>"; };
+		650656762003740300645E9B /* TCP_client */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TCP_client; sourceTree = BUILT_PRODUCTS_DIR; };
+		650656792003740400645E9B /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		650656862003762200645E9B /* connection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connection.c; sourceTree = "<group>"; };
+		650656872003762200645E9B /* connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		65958AB71FF3D96A00C0DACB /* Frameworks */ = {
+		650656732003740300645E9B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,102 +41,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		65958AB11FF3D96A00C0DACB = {
+		6506566D2003740300645E9B = {
 			isa = PBXGroup;
 			children = (
-				65958ABC1FF3D96A00C0DACB /* Battleship */,
-				65958ABB1FF3D96A00C0DACB /* Products */,
+				650656782003740300645E9B /* TCP_client */,
+				650656772003740300645E9B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		65958ABB1FF3D96A00C0DACB /* Products */ = {
+		650656772003740300645E9B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65958ABA1FF3D96A00C0DACB /* Battleship */,
+				650656762003740300645E9B /* TCP_client */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		65958ABC1FF3D96A00C0DACB /* Battleship */ = {
+		650656782003740300645E9B /* TCP_client */ = {
 			isa = PBXGroup;
 			children = (
-				65958ABD1FF3D96A00C0DACB /* main.c */,
-				65958AC41FF3DA0500C0DACB /* tab_functions.c */,
-				65958AC51FF3DA0500C0DACB /* tab_functions.h */,
-				65958AC81FF3DAF800C0DACB /* structures.h */,
-				65958ACA1FF3DF0000C0DACB /* inputs.c */,
-				65958ACB1FF3DF0000C0DACB /* inputs.h */,
+				650656792003740400645E9B /* main.c */,
+				650656862003762200645E9B /* connection.c */,
+				650656872003762200645E9B /* connection.h */,
 			);
-			path = Battleship;
+			path = TCP_client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		65958AB91FF3D96A00C0DACB /* Battleship */ = {
+		650656752003740300645E9B /* TCP_client */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65958AC11FF3D96A00C0DACB /* Build configuration list for PBXNativeTarget "Battleship" */;
+			buildConfigurationList = 6506567D2003740400645E9B /* Build configuration list for PBXNativeTarget "TCP_client" */;
 			buildPhases = (
-				65958AB61FF3D96A00C0DACB /* Sources */,
-				65958AB71FF3D96A00C0DACB /* Frameworks */,
-				65958AB81FF3D96A00C0DACB /* CopyFiles */,
+				650656722003740300645E9B /* Sources */,
+				650656732003740300645E9B /* Frameworks */,
+				650656742003740300645E9B /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Battleship;
-			productName = Battleship;
-			productReference = 65958ABA1FF3D96A00C0DACB /* Battleship */;
+			name = TCP_client;
+			productName = TCP_client;
+			productReference = 650656762003740300645E9B /* TCP_client */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		65958AB21FF3D96A00C0DACB /* Project object */ = {
+		6506566E2003740300645E9B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Daniel Regnard";
 				TargetAttributes = {
-					65958AB91FF3D96A00C0DACB = {
+					650656752003740300645E9B = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 65958AB51FF3D96A00C0DACB /* Build configuration list for PBXProject "Battleship" */;
+			buildConfigurationList = 650656712003740300645E9B /* Build configuration list for PBXProject "TCP_client" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 65958AB11FF3D96A00C0DACB;
-			productRefGroup = 65958ABB1FF3D96A00C0DACB /* Products */;
+			mainGroup = 6506566D2003740300645E9B;
+			productRefGroup = 650656772003740300645E9B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				65958AB91FF3D96A00C0DACB /* Battleship */,
+				650656752003740300645E9B /* TCP_client */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		65958AB61FF3D96A00C0DACB /* Sources */ = {
+		650656722003740300645E9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65958ACC1FF3DF0000C0DACB /* inputs.c in Sources */,
-				65958ABE1FF3D96A00C0DACB /* main.c in Sources */,
-				65958AC61FF3DA0500C0DACB /* tab_functions.c in Sources */,
+				6506567A2003740400645E9B /* main.c in Sources */,
+				650656882003762200645E9B /* connection.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		65958ABF1FF3D96A00C0DACB /* Debug */ = {
+		6506567B2003740400645E9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -188,7 +180,7 @@
 			};
 			name = Debug;
 		};
-		65958AC01FF3D96A00C0DACB /* Release */ = {
+		6506567C2003740400645E9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -229,14 +221,14 @@
 			};
 			name = Release;
 		};
-		65958AC21FF3D96A00C0DACB /* Debug */ = {
+		6506567E2003740400645E9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		65958AC31FF3D96A00C0DACB /* Release */ = {
+		6506567F2003740400645E9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -246,25 +238,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		65958AB51FF3D96A00C0DACB /* Build configuration list for PBXProject "Battleship" */ = {
+		650656712003740300645E9B /* Build configuration list for PBXProject "TCP_client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65958ABF1FF3D96A00C0DACB /* Debug */,
-				65958AC01FF3D96A00C0DACB /* Release */,
+				6506567B2003740400645E9B /* Debug */,
+				6506567C2003740400645E9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65958AC11FF3D96A00C0DACB /* Build configuration list for PBXNativeTarget "Battleship" */ = {
+		6506567D2003740400645E9B /* Build configuration list for PBXNativeTarget "TCP_client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65958AC21FF3D96A00C0DACB /* Debug */,
-				65958AC31FF3D96A00C0DACB /* Release */,
+				6506567E2003740400645E9B /* Debug */,
+				6506567F2003740400645E9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 65958AB21FF3D96A00C0DACB /* Project object */;
+	rootObject = 6506566E2003740300645E9B /* Project object */;
 }

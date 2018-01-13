@@ -24,6 +24,9 @@ int give_boat_size(char code);
 int empty_location_validation (char tab[10][10], coordinates boat);
 int logical_location_validation (char tab[10][10], coordinates boat, int boat_size, int depth, int check_type);
 
+int fill_main_board (char board[10][10]);
+void display_boards(char board[10][10], char mark_board[10][10], char* name);
+
 #endif /* tab_functions_h */
 
 

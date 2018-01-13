@@ -1,53 +1,21 @@
 //
 //  inputs.c
-//  Battleship
+//  TCP_server
 //
-//  Created by Daniel Regnard on 27/12/2017.
-//  Copyright © 2017 Daniel Regnard. All rights reserved.
+//  Created by Daniel Regnard on 13/01/2018.
+//  Copyright © 2018 Daniel Regnard. All rights reserved.
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "inputs.h"
 #include "structures.h"
 #include "tab_functions.h"
 #include <string.h>
-
-int safe_input(const char* output, int max) {
-    
-    int data = 0, check = 0;
-    
-    do {
-        printf("%s", output);
-        fflush(stdin);
-        check = scanf("%d", &data);
-    } while (data < 1 || data > max || check == 0);
-    
-    return data;
-}
-
-void empty_buffer ()
-{
-    int a = 0;
-    while (a != '\n' && a != EOF) {
-        a = getchar();
-    }
-}
-
-int convert_ascii_to_table_index (char input) {
-    
-    if (input >= 65 && input <= 74) {
-        return (int)input - 65;
-    } else if (input >= 97 && input <= 106) {
-        return (int)input - 97;
-    }
-    
-    printf("Error on convert_ascii_to_table_index function");
-    return 0;
-}
+#include "communication.h"
 
 int read_string (char* output, char* data, int size)
 {
-    
     printf("%s", output);
     char* retour_ligne = NULL;
     
@@ -63,6 +31,21 @@ int read_string (char* output, char* data, int size)
     empty_buffer();
     return 0;
 }
+
+void empty_buffer ()
+{
+    int a = 0;
+    while (a != '\n' && a != EOF) {
+        a = getchar();
+    }
+}
+
+
+void get_names(char* name_1, char* name_2, int* socket) {
+    read_string("\nEnter your name : ", name_1, 10);
+    //request("\nEnter your name : ", name_2, socket);
+}
+
 
 int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type) {
     
@@ -101,6 +84,32 @@ int validate_input_pattern(char input_location [3]) {
     
     return 1;
 }
+
+int safe_input(const char* output, int max) {
+    
+    int data = 0, check = 0;
+    
+    do {
+        printf("%s", output);
+        fflush(stdin);
+        check = scanf("%d", &data);
+    } while (data < 1 || data > max || check == 0);
+    
+    return data;
+}
+
+int convert_ascii_to_table_index (char input) {
+    
+    if (input >= 65 && input <= 74) {
+        return (int)input - 65;
+    } else if (input >= 97 && input <= 106) {
+        return (int)input - 97;
+    }
+    
+    printf("Error on convert_ascii_to_table_index function");
+    return 0;
+}
+
 
 int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) {
     
@@ -174,6 +183,29 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) 
 }
 
 
+int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
+    
+    char input[3];
+    int check = 0;
+    coordinates* coor = malloc(sizeof(coordinates));
+    
+    do {
+        read_string("\nEnter coordinate to shoot : \n", input, 3);
+        check = validation_shoot(board, input, coor);
+    } while (check == 0);
+    
+    if (fill_tab(board, *coor, ' ')) {
+        fill_tab(mark_board, *coor, 'x');
+        printf("Poum\n\n");
+        lives = lives - 1;
+    } else {
+        fill_tab(mark_board, *coor, 'X');
+        printf("Dans l'eau\n\n");
+    }
+    
+    return 0;
+}
+
 int validation_shoot (char tab[10][10], char input_location [3], coordinates* coor) {
     
     if (validate_input_pattern(input_location)) {
@@ -187,11 +219,6 @@ int validation_shoot (char tab[10][10], char input_location [3], coordinates* co
         return 0;
     }
 }
-
-
-
-
-
 
 
 
