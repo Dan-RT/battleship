@@ -15,6 +15,8 @@
 
 void initialiaze_tab(char tab[10][10]);
 void display_tab(char tab[10][10], char* ouptut, int separation, char* name);
+void display_tab_to_be_send(char tab[10][10], char* ouptut, int separation, char* name, char* to_be_send);
+
 int fill_tab(char tab[10][10], coordinates boat, char boat_type);
 void initialiaze_tab_ship (ship ships[10]);
 void display_tab_ship(ship ships[10]);
@@ -26,6 +28,7 @@ int logical_location_validation (char tab[10][10], coordinates boat, int boat_si
 
 int fill_main_board (char board[10][10]);
 void display_boards(char board[10][10], char mark_board[10][10], char* name);
+void display_boards_to_be_send(char board[10][10], char mark_board[10][10], char* name, char* to_be_send);
 
 #endif /* tab_functions_h */
 

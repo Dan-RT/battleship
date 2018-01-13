@@ -22,5 +22,8 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type);
 int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type);
 int validation_shoot(char tab[10][10], char input_location [3], coordinates* coor);
 int shoot_location (char board[10][10], char mark_board[10][10], int* lives);
+int shoot_location_request (char board[10][10], char mark_board[10][10], int* lives, char* to_be_send, int* socket);
+
+
 
 #endif /* inputs_h */

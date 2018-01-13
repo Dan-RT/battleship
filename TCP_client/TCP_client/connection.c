@@ -53,7 +53,7 @@ int connection(int* clientSocket) {
     serverAddr.sin_family = AF_INET;
     
     /* Set port number, using htons function to use proper byte order */
-    serverAddr.sin_port = htons(7891);
+    serverAddr.sin_port = htons(1980);
     
     /* Set IP address to localhost */
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
@@ -99,7 +99,7 @@ int send_message(int newSocket, char* data) {
     
     /*---- Send message to the socket of the incoming connection ----*/
     strcpy(buffer, data);
-    send(newSocket,buffer,1024,0);
+    send(newSocket,buffer,strlen(buffer)+1,0);
     
     return 0;
 }

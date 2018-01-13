@@ -43,7 +43,7 @@ void empty_buffer ()
 
 void get_names(char* name_1, char* name_2, int* socket) {
     read_string("\nEnter your name : ", name_1, 10);
-    //request("\nEnter your name : ", name_2, socket);
+    request("\nEnter your name : ", name_2, socket);
 }
 
 
@@ -193,6 +193,35 @@ int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
         read_string("\nEnter coordinate to shoot : \n", input, 3);
         check = validation_shoot(board, input, coor);
     } while (check == 0);
+    
+    if (fill_tab(board, *coor, ' ')) {
+        fill_tab(mark_board, *coor, 'x');
+        printf("Poum\n\n");
+        lives = lives - 1;
+    } else {
+        fill_tab(mark_board, *coor, 'X');
+        printf("Dans l'eau\n\n");
+    }
+    
+    return 0;
+}
+
+int shoot_location_request (char board[10][10], char mark_board[10][10], int* lives, char* to_be_send, int* socket) {
+    
+    //char input[3];
+    char response[10];
+    int check = 0;
+    coordinates* coor = malloc(sizeof(coordinates));
+    
+    sprintf(to_be_send + strlen(to_be_send),"\nEnter coordinate to shoot : \n");
+    request(to_be_send, response, socket);
+    
+    if (validation_shoot(board, response, coor) == 0) {
+        do {
+            request("\nEnter coordinate to shoot : \n", response, socket);
+            check = validation_shoot(board, response, coor);
+        } while (check == 0);
+    }
     
     if (fill_tab(board, *coor, ' ')) {
         fill_tab(mark_board, *coor, 'x');

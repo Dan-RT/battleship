@@ -57,7 +57,7 @@ void display_tab_to_be_send(char tab[10][10], char* ouptut, int separation, char
     int i = 0, j = 0;
     char letter = 'A';
     
-    sprintf(to_be_send,"\n\n");
+    sprintf(to_be_send + strlen(to_be_send),"\n\n");
     
     printf("\n\n");
     if (separation) {
@@ -284,6 +284,13 @@ void display_boards(char board[10][10], char mark_board[10][10], char* name) {
     display_tab(board, "Main Board :", 1, name);
     display_tab(mark_board, "Mark Board :", 0, name);
 }
+
+void display_boards_to_be_send(char board[10][10], char mark_board[10][10], char* name, char* to_be_send) {
+    display_tab_to_be_send(board, "Main Board :", 1, name, to_be_send);
+    display_tab_to_be_send(mark_board, "Mark Board :", 0, name, to_be_send);
+}
+
+
 
 
 
