@@ -10,27 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TCP_server/inputs.c"
-            timestampString = "537574797.797243"
+            timestampString = "537630668.541051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TCP_server/tab_functions.c"
-            timestampString = "537574846.357402"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "display_tab_to_be_send()"
-            landmarkType = "9">
+            startingLineNumber = "441"
+            endingLineNumber = "441">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -40,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TCP_server/main.c"
-            timestampString = "537575632.506793"
+            timestampString = "537630818.6606621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "play()"
             landmarkType = "9">
          </BreakpointContent>
@@ -55,13 +39,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TCP_server/inputs.c"
-            timestampString = "537575233.7224081"
+            filePath = "communication.c"
+            timestampString = "537631295.524296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "shoot_location_request()"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "send_message()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -72,12 +56,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "communication.c"
-            timestampString = "537575262.9068739"
+            timestampString = "537634657.595616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "send_message()"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "request()"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

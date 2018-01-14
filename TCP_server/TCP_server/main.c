@@ -16,6 +16,7 @@
 #include "tab_functions.h"
 #include <unistd.h>
 #include <pthread.h>
+#include <string.h>
 
 int fill_main_board (char board[10][10]);
 int shoot_location (char board[10][10], char mark_board[10][10], int* lives);
@@ -76,7 +77,7 @@ int main(void)
     int socket;
     int* new_socket = &socket;
 
-    
+
     connection(new_socket);
     
     player* player1 = malloc(sizeof(player));
@@ -148,25 +149,25 @@ int main(void)
 int play (player* player1, player* player2, int* socket) {
     
     int alternance = 0;
-    player1->lives = 30;
-    player2->lives = 30;
+    player1->lives = 5; //30;
+    player2->lives = 5; //30;
     char to_be_send[1024] = "";
-    
     
     while (alternance < 10) {
         if (alternance % 2 == 0) {
             display_boards(player1->main_board, player1->mark_board, player1->name);
             printf("\nNumber of lives : %d\n", player1->lives);
             shoot_location(player2->main_board, player1->mark_board, &player2->lives);
-            //display_boards(player1->main_board, player1->mark_board, player1->name);
         } else {
             printf("Waiting fot player 2 to play...");
-            strcpy(to_be_send, "");
-            display_boards_to_be_send(player2->main_board, player2->mark_board, player2->name, to_be_send);
             
+            strcpy(to_be_send, "");     //erase string
+            display_boards_to_be_send(player2->main_board, player2->mark_board, player2->name, to_be_send);     //filling string
+            simple_display(to_be_send, socket); //sending it
+            
+            strcpy(to_be_send, "");
             sprintf(to_be_send + strlen(to_be_send),"\nNumber of lives : %d\n", player2->lives);
-            shoot_location_request(player1->main_board, player2->mark_board, &player1->lives, to_be_send, socket);
-            //display_boards(player2->main_board, player2->mark_board, player2->name);
+            shoot_location_request(player1->main_board, player2->mark_board, &player1->lives, to_be_send, socket);      //request is made inside this function
         }
         alternance++;
     }

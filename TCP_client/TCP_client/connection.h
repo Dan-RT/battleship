@@ -13,9 +13,9 @@
 
 int read_string (char* output, char* data, int size);
 void empty_buffer ();
-int receive_message(int clientSocket);
+int receive_message(int clientSocket, char* output);
 int send_message(int newSocket, char* data);
 int connection(int* clientSocket);
-
+int define_message (char* data);
 
 #endif /* connection_h */

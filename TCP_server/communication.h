@@ -15,6 +15,6 @@ int connection(int* newSocket);
 int send_message(int newSocket, char* data);
 int receive_message(int clientSocket, char* output);
 void request(char* input, char* ouptut, int* socket);
-
+void simple_display(char* input, int* socket);
 
 #endif /* communication_h */

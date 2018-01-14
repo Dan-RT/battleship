@@ -12,6 +12,7 @@
 #include "structures.h"
 #include <ctype.h>
 #include "inputs.h"
+#include <string.h>
 
 void initialiaze_tab(char tab[10][10]) {
  

@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <pthread.h>
 #include "connection.h"
@@ -66,15 +67,25 @@ int main(void)
     int socket;
     int* new_socket = &socket;
     char* input = malloc(100*sizeof(char));
+    char* message = malloc(1024*sizeof(char));
     
     connection(new_socket);
     
     while (1) {
-        receive_message(*new_socket);
+        receive_message(*new_socket, message);
         
-        read_string("", input, 100);
-        send_message(*new_socket, input);
+        if (define_message(message) == 1) {
+            //si c'est une request
+            read_string("", input, 100);
+            send_message(*new_socket, input);
+        } else if (define_message(message) == 3) {
+            //End of the game
+            break;
+        }
     }
+    
+    free(input);
+    free(message);
     
     /*
     int *args = &socket;

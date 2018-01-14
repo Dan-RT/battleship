@@ -6,6 +6,8 @@
 //  Copyright © 2018 Daniel Regnard. All rights reserved.
 //
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "connection.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -78,7 +80,7 @@ int connection(int* clientSocket) {
     return 0;
 }
 
-int receive_message(int clientSocket) {
+int receive_message(int clientSocket, char* output) {
     
     char buffer[1024] = {'\0'};
     
@@ -86,9 +88,8 @@ int receive_message(int clientSocket) {
     while (buffer[0] == '\0') {
         recv(clientSocket, buffer, 1024, 0);
     }
-    
-    /*---- Print the received message ----*/
-    printf("%s",buffer);
+    printf("Received : %s\n",buffer);
+    strcpy(output, buffer);
     
     return 1;
 }
@@ -102,6 +103,45 @@ int send_message(int newSocket, char* data) {
     send(newSocket,buffer,strlen(buffer)+1,0);
     
     return 0;
+}
+
+int define_message (char* data) {
+    //cette fonction check si c'est une request ou un simple display, et enlève de data le code #
+    
+    const char s[2] = "#";
+    char* token = malloc(1024*sizeof(char));
+    int returned_value = 0;
+    char* data_copy = malloc(1024*sizeof(char));
+    strcpy(data_copy, data);
+    
+    /* get the first token */
+    token = strtok(data_copy, s);
+    
+    //checking what is token equals to
+    if (strcmp(token,"request") == 0) {
+        returned_value = 1;
+    } else if (strcmp(token,"display") == 0) {
+        returned_value = 2;
+    } else if (strcmp(token,"end") == 0) {
+        returned_value = 3;
+    } else {
+        printf( "Code unknown : |%s|\n", token );
+        return 0;
+    }
+    
+    /* walk through other tokens */
+    //while(token != NULL) {
+        //printf( "%s\n", token );
+        token = strtok(NULL, s);
+        strcpy(data, token);    //it's supposed to have only one token left
+    //}
+    
+    if (token != NULL) {
+        //free(token);
+    }
+    free(data_copy);
+    
+    return returned_value;
 }
 
 

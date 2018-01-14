@@ -196,8 +196,8 @@ int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
     
     if (fill_tab(board, *coor, ' ')) {
         fill_tab(mark_board, *coor, 'x');
-        printf("Poum\n\n");
-        lives = lives - 1;
+        printf("Hit\n\n");
+        *lives = *lives - 1;
     } else {
         fill_tab(mark_board, *coor, 'X');
         printf("Dans l'eau\n\n");
@@ -225,8 +225,12 @@ int shoot_location_request (char board[10][10], char mark_board[10][10], int* li
     
     if (fill_tab(board, *coor, ' ')) {
         fill_tab(mark_board, *coor, 'x');
-        printf("Poum\n\n");
-        lives = lives - 1;
+        
+        strcpy(to_be_send, "#display#");
+        sprintf(to_be_send + strlen(to_be_send),"Hit\n\n");
+        send_message(*socket, to_be_send);
+        
+        *lives = *lives - 1;
     } else {
         fill_tab(mark_board, *coor, 'X');
         printf("Dans l'eau\n\n");
