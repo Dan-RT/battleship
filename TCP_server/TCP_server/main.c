@@ -18,7 +18,6 @@
 #include <pthread.h>
 #include <string.h>
 
-int fill_main_board (char board[10][10]);
 int shoot_location (char board[10][10], char mark_board[10][10], int* lives);
 void display_boards(char board[10][10], char mark_board[10][10], char* name);
 int play (player* player1, player* player2, int* socket);
@@ -98,6 +97,11 @@ int main(void)
     initialiaze_tab(player2->main_board);
     initialiaze_tab(player2->mark_board);
     
+    
+    //fill_main_board(player1->main_board, 0, NULL);
+    fill_main_board(player2->main_board, 1, new_socket);
+    
+    /*
     player1->main_board[0][0] = 'C';
     player1->main_board[0][1] = 'C';
     player1->main_board[0][2] = 'C';
@@ -108,9 +112,9 @@ int main(void)
     player2->main_board[0][1] = 'C';
     player2->main_board[0][2] = 'C';
     player2->main_board[0][3] = 'C';
-    player2->main_board[0][4] = 'C';
+    player2->main_board[0][4] = 'C';*/
     
-    printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
+    //printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
     
     play(player1, player2, new_socket);
     

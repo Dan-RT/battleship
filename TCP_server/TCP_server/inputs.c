@@ -47,16 +47,23 @@ void get_names(char* name_1, char* name_2, int* socket) {
 }
 
 
-int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type) {
+int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type, int remote, int* socket) {
+
+    char data[32];
     
     if (validate_input_pattern(input_location)) {
         
         coor->x = convert_ascii_to_table_index(input_location[0]);
         coor->y = input_location[1] - 48;
         
-        printf("\nCoordinates : %d, %d.\n", coor->x, coor->y);
+        if (remote) {
+            sprintf(data, "\nCoordinates : %d, %d.\n", coor->x, coor->y);
+            simple_display(data, socket);
+        } else {
+            printf("\nCoordinates : %d, %d.\n", coor->x, coor->y);
+        }
         
-        if (validate_fill_location(tab, *coor, boat_type)) {
+        if (validate_fill_location(tab, *coor, boat_type, remote, socket)) {
             return 1;
         } else {
             return 0;
@@ -92,10 +99,11 @@ int convert_ascii_to_table_index (char input) {
 }
 
 
-int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) {
+int validate_fill_location (char tab[10][10], coordinates boat, char boat_type, int remote, int* socket) {
     
     int i = 0, flag = 0, choice = 0;
     int orientation[4];
+    char data[128];
     
     for (i = 0; i < 4; i++) {
         orientation[i] = 0;
@@ -118,23 +126,53 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) 
             if (orientation[i] == 1) {
                 switch (i) {
                     case 0:
-                        printf("1 - Vertical South-orientation avalaible.\n");
+                        if (remote) {
+                            sprintf(data, "1 - Vertical South-orientation avalaible.\n");
+                            simple_display(data, socket);
+                        } else {
+                            printf("1 - Vertical South-orientation avalaible.\n");
+                        }
+                        
                         break;
                     case 1:
-                        printf("2 - Vertical North-orientation avalaible.\n");
+                        if (remote) {
+                            sprintf(data, "2 - Vertical North-orientation avalaible.\n");
+                            simple_display(data, socket);
+                        } else {
+                            printf("2 - Vertical North-orientation avalaible.\n");
+                        }
+                        
                         break;
                     case 2:
-                        printf("3 - Horizontal East-orientation avalaible.\n");
+                        if (remote) {
+                            sprintf(data, "3 - Horizontal East-orientation avalaible.\n");
+                            simple_display(data, socket);
+                        } else {
+                            printf("3 - Horizontal East-orientation avalaible.\n");
+                        }
+                        
                         break;
                     case 3:
-                        printf("4 - Horizontal West-orientation avalaible.\n");
+                        if (remote) {
+                            sprintf(data, "4 - Horizontal West-orientation avalaible.\n");
+                            simple_display(data, socket);
+                        } else {
+                            printf("4 - Horizontal West-orientation avalaible.\n");
+                        }
                         break;
                 }
             }
         }
         
         do {
-            choice = safe_input("Choose a orientation for your ship : ", 4);
+            if (remote) {
+                sprintf(data, "Choose a orientation for your ship : ");
+                request(data, data, socket);
+                //pas sécurisée
+                choice = data[0];
+            } else {
+                choice = safe_input("Choose a orientation for your ship : ", 4);
+            }
         } while (orientation[choice-1] == 0);
         
         for (i = 0; i < give_boat_size(boat_type); i++) {
@@ -159,7 +197,12 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) 
         }
         return 1;
     }
-    printf("The boat can't be placed here.\n");
+    if (remote) {
+        sprintf(data, "The boat can't be placed here.\n");
+        simple_display(data, socket);
+    } else {
+        printf("The boat can't be placed here.\n");
+    }
     return 0;
 }
 

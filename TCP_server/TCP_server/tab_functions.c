@@ -13,6 +13,7 @@
 #include <ctype.h>
 #include "inputs.h"
 #include <string.h>
+#include "communication.h"
 
 void initialiaze_tab(char tab[10][10]) {
  
@@ -85,27 +86,55 @@ void display_tab_to_be_send(char tab[10][10], char* ouptut, int separation, char
 
 
 
-int fill_main_board (char board[10][10]) {
+int fill_main_board (char board[10][10], int remote, int* socket) {
     
     ship ships[10];
-    char output[50];
+    char output[512];
     char input[3];
-    int i = 0, check = 0;
+    int i = 0, check = 0, flag = 0;
     coordinates* coor = malloc(sizeof(coordinates));
     
     initialiaze_tab_ship(ships);
-    display_tab_ship(ships);
+    if (remote) {
+        display_tab_ship_request(ships, output);
+        simple_display(output, socket);
+    } else {
+        display_tab_ship(ships);
+    }
     
     for (i = 0; i < 10; i++) {
         do {
             //permet de créer dans input une un string avec des variables dedans
-            snprintf(output, sizeof(output),
-                     "\n\nEnter coordinate for a %s : \n",
-                     give_boat_name(ships[i].code));
-            read_string(output, input, 3);
-            check = validation_fill(board, input, coor, *give_boat_name(ships[i].code));
+            strcpy(output, "");
+            sprintf(output + strlen(output),"\n\nEnter coordinate for a %s : \n",
+                    give_boat_name(ships[i].code));
+            if (remote) {
+                if (flag) {
+                    sprintf(output + strlen(output),"\n\nEnter a valid coordinate for a %s : \n",
+                            give_boat_name(ships[i].code));
+                    request(output, input, socket);
+                } else {
+                    request(output, input, socket);
+                }
+            } else {
+                read_string(output, input, 3);
+            }
+            check = validation_fill(board, input, coor, *give_boat_name(ships[i].code), remote, socket);
+            flag = 1;
         } while (check == 0);
+        flag = 0;
         check = 0;
+        
+        
+        if (remote) {
+            strcpy(output, "");
+            display_tab_to_be_send(board, "Main Board", 1, "", output);
+            simple_display(output, socket);
+        } else {
+            display_tab(board, "Main Board", 1, "");
+        }
+        
+        
     }
     
     return 0;
@@ -162,8 +191,6 @@ int logical_location_validation (char tab[10][10], coordinates boat, int boat_si
     
     int i = 0, j = 0;
     
-    
-    
     if (depth != boat_size) {
         if (boat.x < 0 || boat.y < 0 || boat.x > 9 || boat.y > 9 ) {
             //Pour éviter qu'on autorise un bateau hors du tableau
@@ -174,25 +201,41 @@ int logical_location_validation (char tab[10][10], coordinates boat, int boat_si
                     if (i == boat.x && j == boat.y) {
                         switch (check_type) {
                             case 1:
-                                boat.x++;
-                                depth++;
-                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                                break;
+                                if (tab[i][j] == '-') {
+                                    boat.x++;
+                                    depth++;
+                                    return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                    break;
+                                } else {
+                                    return 1;
+                                }
                             case 2:
-                                boat.x--;
-                                depth++;
-                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                                break;
+                                if (tab[i][j] == '-') {
+                                    boat.x--;
+                                    depth++;
+                                    return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                    break;
+                                } else {
+                                    return 1;
+                                }
                             case 3:
-                                boat.y++;
-                                depth++;
-                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                                break;
+                                if (tab[i][j] == '-') {
+                                    boat.y++;
+                                    depth++;
+                                    return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                    break;
+                                } else {
+                                    return 1;
+                                }
                             case 4:
-                                boat.y--;
-                                depth++;
-                                return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
-                                break;
+                                if (tab[i][j] == '-') {
+                                    boat.y--;
+                                    depth++;
+                                    return 0 + logical_location_validation(tab, boat, boat_size, depth, check_type);
+                                    break;
+                                } else {
+                                    return 1;
+                                }
                             default:
                                 return 1;
                                 break;
@@ -234,6 +277,14 @@ void display_tab_ship(ship ships[10]) {
     
     for(i = 0; i < 10; i++) {
         printf("Name : %c, Size : %d\n", ships[i].code, ships[i].size);
+    }
+}
+
+void display_tab_ship_request(ship ships[10], char* data) {
+    int i = 0;
+    strcpy(data, "");
+    for(i = 0; i < 10; i++) {
+        sprintf(data + strlen(data),"Name : %c, Size : %d\n", ships[i].code, ships[i].size);
     }
 }
 
