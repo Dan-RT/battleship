@@ -10,27 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TCP_client/main.c"
-            timestampString = "537639092.427767"
+            timestampString = "537663554.136767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
-            endingLineNumber = "131">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TCP_client/connection.c"
-            timestampString = "537633927.220392"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "define_message()"
-            landmarkType = "9">
+            endingLineNumber = "131"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -170,6 +170,7 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type, 
                 request(data, data, socket);
                 //pas sécurisée
                 choice = data[0];
+                choice = choice - 48;
             } else {
                 choice = safe_input("Choose a orientation for your ship : ", 4);
             }

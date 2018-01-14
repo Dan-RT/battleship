@@ -14,6 +14,8 @@
 #include <string.h>
 #include <arpa/inet.h>
 
+#include <unistd.h>
+
 int read_string (char* output, char* data, int size)
 {
     printf("%s", output);
@@ -75,6 +77,7 @@ int connection(int* clientSocket) {
 
     } else {
         printf("Connection failed.\n");
+        exit(0);
     }
     
     return 0;
@@ -85,9 +88,10 @@ int receive_message(int clientSocket, char* output) {
     char buffer[1024] = {'\0'};
     
     /*---- Read the message from the server into the buffer ----*/
-    while (buffer[0] == '\0') {
+    /*while (buffer[0] == '\0') {
         recv(clientSocket, buffer, 1024, 0);
-    }
+    }*/
+    read(clientSocket, buffer, 1024);
     //printf("Received : %s\n",buffer);
     strcpy(output, buffer);
     
@@ -100,7 +104,8 @@ int send_message(int newSocket, char* data) {
     
     /*---- Send message to the socket of the incoming connection ----*/
     strcpy(buffer, data);
-    send(newSocket,buffer,strlen(buffer)+1,0);
+    //send(newSocket,buffer,strlen(buffer)+1,0);
+    write(newSocket, buffer, 1024);
     
     return 0;
 }
@@ -111,7 +116,7 @@ int define_message (char* data) {
     const char s[2] = "#";
     char* token = malloc(1024*sizeof(char));
     int returned_value = 0;
-    char* data_copy = malloc(1024*sizeof(char));
+    char data_copy[1024];
     strcpy(data_copy, data);
     
     /* get the first token */
@@ -139,7 +144,7 @@ int define_message (char* data) {
     if (token != NULL) {
         //free(token);
     }
-    free(data_copy);
+    //free(data_copy);
     
     return returned_value;
 }

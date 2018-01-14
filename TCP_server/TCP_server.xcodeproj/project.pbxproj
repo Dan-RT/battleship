@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		653B51D52004ABE400BD07D7 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 653B51D42004ABE400BD07D7 /* main.c */; };
+		657423FB200C0C0E007FDFB0 /* communication.c in Sources */ = {isa = PBXBuildFile; fileRef = 657423FA200C0C0E007FDFB0 /* communication.c */; };
 		65C4BBAB200A60EC0065F519 /* inputs.c in Sources */ = {isa = PBXBuildFile; fileRef = 65C4BBA9200A60EC0065F519 /* inputs.c */; };
 		65C4BBAE200A626F0065F519 /* tab_functions.c in Sources */ = {isa = PBXBuildFile; fileRef = 65C4BBAC200A626F0065F519 /* tab_functions.c */; };
-		65EDB36F2004D0EF001C92BA /* communication.c in Sources */ = {isa = PBXBuildFile; fileRef = 65EDB36D2004D0EF001C92BA /* communication.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,13 +28,13 @@
 /* Begin PBXFileReference section */
 		653B51D12004ABE400BD07D7 /* TCP_server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TCP_server; sourceTree = BUILT_PRODUCTS_DIR; };
 		653B51D42004ABE400BD07D7 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		657423F9200C0C0E007FDFB0 /* communication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = communication.h; sourceTree = "<group>"; };
+		657423FA200C0C0E007FDFB0 /* communication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = communication.c; sourceTree = "<group>"; };
 		65C4BBA5200A5F550065F519 /* structures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = structures.h; sourceTree = "<group>"; };
 		65C4BBA9200A60EC0065F519 /* inputs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = inputs.c; sourceTree = "<group>"; };
 		65C4BBAA200A60EC0065F519 /* inputs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputs.h; sourceTree = "<group>"; };
 		65C4BBAC200A626F0065F519 /* tab_functions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tab_functions.c; sourceTree = "<group>"; };
 		65C4BBAD200A626F0065F519 /* tab_functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tab_functions.h; sourceTree = "<group>"; };
-		65EDB36D2004D0EF001C92BA /* communication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = communication.c; path = ../communication.c; sourceTree = "<group>"; };
-		65EDB36E2004D0EF001C92BA /* communication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = communication.h; path = ../communication.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +70,10 @@
 				653B51D42004ABE400BD07D7 /* main.c */,
 				65C4BBA9200A60EC0065F519 /* inputs.c */,
 				65C4BBAC200A626F0065F519 /* tab_functions.c */,
+				657423FA200C0C0E007FDFB0 /* communication.c */,
+				657423F9200C0C0E007FDFB0 /* communication.h */,
 				65C4BBAD200A626F0065F519 /* tab_functions.h */,
 				65C4BBAA200A60EC0065F519 /* inputs.h */,
-				65EDB36D2004D0EF001C92BA /* communication.c */,
-				65EDB36E2004D0EF001C92BA /* communication.h */,
 				65C4BBA5200A5F550065F519 /* structures.h */,
 			);
 			path = TCP_server;
@@ -137,8 +137,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C4BBAB200A60EC0065F519 /* inputs.c in Sources */,
-				65EDB36F2004D0EF001C92BA /* communication.c in Sources */,
 				653B51D52004ABE400BD07D7 /* main.c in Sources */,
+				657423FB200C0C0E007FDFB0 /* communication.c in Sources */,
 				65C4BBAE200A626F0065F519 /* tab_functions.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

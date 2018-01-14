@@ -15,6 +15,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 
+#include <unistd.h>
 
 int connection(int* newSocket) {
     
@@ -64,7 +65,8 @@ int send_message(int newSocket, char* data) {
     
     /*---- Send message to the socket of the incoming connection ----*/
     strcpy(message, data);
-    send(newSocket, message, strlen(message)+1, 0);
+    //send(newSocket, message, strlen(message)+1, 0);
+    write(newSocket, message, 1024);
     
     return 0;
 }
@@ -74,9 +76,10 @@ int receive_message(int clientSocket, char* output) {
     char buffer[1024] = {'\0'};
     
     /*---- Read the message from the server into the buffer ----*/
-    while (buffer[0] == '\0') {
-        recv(clientSocket, buffer, 50, 0);
-    }
+    /*while (buffer[0] == '\0') {
+        recv(clientSocket, buffer, 1024, 0);
+    }*/
+    read(clientSocket, buffer, 1024);
     strcpy(output, buffer);
     
     return 1;
