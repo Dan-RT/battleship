@@ -88,7 +88,7 @@ int receive_message(int clientSocket, char* output) {
     while (buffer[0] == '\0') {
         recv(clientSocket, buffer, 1024, 0);
     }
-    printf("Received : %s\n",buffer);
+    //printf("Received : %s\n",buffer);
     strcpy(output, buffer);
     
     return 1;

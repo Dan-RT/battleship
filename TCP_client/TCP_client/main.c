@@ -64,7 +64,7 @@ int main(void)
     
     //printf("Avant la création des threads.\n");
     
-    int socket;
+    int socket, type_message = -1;
     int* new_socket = &socket;
     char* input = malloc(100*sizeof(char));
     char* message = malloc(1024*sizeof(char));
@@ -73,15 +73,19 @@ int main(void)
     
     while (1) {
         receive_message(*new_socket, message);
-        
-        if (define_message(message) == 1) {
+        type_message = define_message(message);
+        if (type_message == 1) {
+            printf("%s", message);
             //si c'est une request
             read_string("", input, 100);
             send_message(*new_socket, input);
-        } else if (define_message(message) == 3) {
+        } else if (type_message == 3) {
             //End of the game
             break;
+        } else {
+            printf("%s", message);
         }
+        
     }
     
     free(input);

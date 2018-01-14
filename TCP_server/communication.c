@@ -60,14 +60,11 @@ int connection(int* newSocket) {
 
 
 int send_message(int newSocket, char* data) {
-    printf("send_message\n");
-    char* msg = malloc(1024*sizeof(char));
+    char message[1024] = {'\0'};
     
     /*---- Send message to the socket of the incoming connection ----*/
-    strcpy(msg, data);
-    send(newSocket, msg, strlen(msg)+1, 0);
-    
-    free(msg);
+    strcpy(message, data);
+    send(newSocket, message, strlen(message)+1, 0);
     
     return 0;
 }
@@ -86,19 +83,22 @@ int receive_message(int clientSocket, char* output) {
 }
 
 void request(char* input, char* ouptut, int* socket) {
-    char* message = malloc(1024*sizeof(char));
+    char message[1024] = {'\0'};
+    
     strcpy(message, "#request#");
     strcat (message, input);
-    //sprintf(message + strlen(input), "%s", input);
     
     send_message(*socket, message);
     receive_message(*socket, ouptut);
-    free(message);
 }
 
 void simple_display(char* input, int* socket) {
-    char* message = "#display#";
-    sprintf(message +strlen(input), "%s", input);
+    
+    char message[1024] = {'\0'};
+    
+    strcpy(message, "#display#");
+    strcat (message, input);
+    
     send_message(*socket, message);
 }
 

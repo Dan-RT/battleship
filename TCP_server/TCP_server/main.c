@@ -159,7 +159,7 @@ int play (player* player1, player* player2, int* socket) {
             printf("\nNumber of lives : %d\n", player1->lives);
             shoot_location(player2->main_board, player1->mark_board, &player2->lives);
         } else {
-            printf("Waiting fot player 2 to play...");
+            printf("Waiting for player 2 to play...");
             
             strcpy(to_be_send, "");     //erase string
             display_boards_to_be_send(player2->main_board, player2->mark_board, player2->name, to_be_send);     //filling string

@@ -66,25 +66,6 @@ int validation_fill (char tab[10][10], char input_location [3], coordinates* coo
     }
 }
 
-
-int validate_input_pattern(char input_location [3]) {
-    
-    if (input_location[0] < 65 || input_location[0] > 74) {
-        if (input_location[0] < 97 || input_location[0] > 106) {
-            printf("Please respect the pattern \"A1\" (Char - Integer).\n");
-            return 0;
-        }
-    }
-    
-    if (input_location[1] < 48 || input_location[1] > 58) {
-        
-        printf("Please respect the pattern \"A1\" (Char - Integer).\n");
-        return 0;
-    }
-    
-    return 1;
-}
-
 int safe_input(const char* output, int max) {
     
     int data = 0, check = 0;
@@ -183,6 +164,37 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) 
 }
 
 
+int validation_shoot (char tab[10][10], char input_location [3], coordinates* coor) {
+    
+    if (validate_input_pattern(input_location)) {
+        
+        coor->x = convert_ascii_to_table_index(input_location[0]);
+        coor->y = input_location[1] - 48;
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int validate_input_pattern(char input_location [3]) {
+    
+    if (input_location[0] < 65 || input_location[0] > 74) {
+        if (input_location[0] < 97 || input_location[0] > 106) {
+            //printf("Please respect the pattern \"A1\" (Char - Integer).\n");
+            return 0;
+        }
+    }
+    
+    if (input_location[1] < 48 || input_location[1] > 58) {
+        
+        //printf("Please respect the pattern \"A1\" (Char - Integer).\n");
+        return 0;
+    }
+    
+    return 1;
+}
+
+
 int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
     
     char input[3];
@@ -218,7 +230,7 @@ int shoot_location_request (char board[10][10], char mark_board[10][10], int* li
     
     if (validation_shoot(board, response, coor) == 0) {
         do {
-            request("\nEnter coordinate to shoot : \n", response, socket);
+            request("\nPlease respect the pattern \"A1\" (Char - Integer) or choose a correct location.\nEnter coordinate to shoot : \n", response, socket);
             check = validation_shoot(board, response, coor);
         } while (check == 0);
     }
@@ -226,34 +238,21 @@ int shoot_location_request (char board[10][10], char mark_board[10][10], int* li
     if (fill_tab(board, *coor, ' ')) {
         fill_tab(mark_board, *coor, 'x');
         
-        strcpy(to_be_send, "#display#");
+        strcpy(to_be_send, "");     //erase string
         sprintf(to_be_send + strlen(to_be_send),"Hit\n\n");
-        send_message(*socket, to_be_send);
+        simple_display(to_be_send, socket);
         
         *lives = *lives - 1;
     } else {
         fill_tab(mark_board, *coor, 'X');
-        printf("Dans l'eau\n\n");
+        
+        strcpy(to_be_send, "");     //erase string
+        sprintf(to_be_send + strlen(to_be_send),"Dans l'eau\n\n");
+        simple_display(to_be_send, socket);
     }
     
     return 0;
 }
-
-int validation_shoot (char tab[10][10], char input_location [3], coordinates* coor) {
-    
-    if (validate_input_pattern(input_location)) {
-        
-        coor->x = convert_ascii_to_table_index(input_location[0]);
-        coor->y = input_location[1] - 48;
-        
-        printf("\nCoordinates : %d, %d.\n", coor->x, coor->y);
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-
 
 
 
