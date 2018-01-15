@@ -57,7 +57,7 @@ int connection(int* clientSocket) {
     serverAddr.sin_family = AF_INET;
     
     /* Set port number, using htons function to use proper byte order */
-    serverAddr.sin_port = htons(1981);
+    serverAddr.sin_port = htons(1980);
     
     /* Set IP address to localhost */
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
@@ -122,29 +122,32 @@ int define_message (char* data) {
     /* get the first token */
     token = strtok(data_copy, s);
     
-    //checking what is token equals to
-    if (strcmp(token,"request") == 0) {
-        returned_value = 1;
-    } else if (strcmp(token,"display") == 0) {
-        returned_value = 2;
-    } else if (strcmp(token,"end") == 0) {
-        returned_value = 3;
-    } else {
-        printf( "Code unknown : |%s|\n", token );
-        return 0;
-    }
-    
-    /* walk through other tokens */
-    //while(token != NULL) {
+    if (token != NULL) {
+        //checking what is token equals to
+        if (strcmp(token,"request") == 0) {
+            returned_value = 1;
+        } else if (strcmp(token,"display") == 0) {
+            returned_value = 2;
+        } else if (strcmp(token,"end") == 0) {
+            returned_value = 3;
+        } else {
+            printf( "Code unknown : |%s|\n", token );
+            return 0;
+        }
+        
+        /* walk through other tokens */
+        //while(token != NULL) {
         //printf( "%s\n", token );
         token = strtok(NULL, s);
         strcpy(data, token);    //it's supposed to have only one token left
-    //}
-    
-    if (token != NULL) {
-        //free(token);
+        //}
+        
+        if (token != NULL) {
+            //free(token);
+        }
+        //free(data_copy);
     }
-    //free(data_copy);
+    
     
     return returned_value;
 }

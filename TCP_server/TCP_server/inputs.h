@@ -14,7 +14,7 @@
 
 int read_string (char* output, char* data, int size);
 void empty_buffer ();
-void get_names(char* name_1, char* name_2, int* socket);
+void get_name(char* name_1, char* name_2, int remote, int* socket);
 int safe_input(const char* output, int max);
 int validate_input_pattern(char input_location [3]);
 int convert_ascii_to_table_index (char input);

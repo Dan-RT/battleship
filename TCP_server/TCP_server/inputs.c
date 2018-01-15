@@ -40,12 +40,13 @@ void empty_buffer ()
     }
 }
 
-
-void get_names(char* name_1, char* name_2, int* socket) {
-    read_string("\nEnter your name : ", name_1, 10);
-    request("\nEnter your name : ", name_2, socket);
+void get_name(char* name_1, char* name_2, int remote, int* socket) {
+    if (remote) {
+        request("\nEnter your name : ", name_2, socket);
+    } else {
+        read_string("\nEnter your name : ", name_1, 10);
+    }
 }
-
 
 int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type, int remote, int* socket) {
 

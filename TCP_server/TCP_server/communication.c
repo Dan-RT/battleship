@@ -24,7 +24,6 @@ int connection(int* newSocket) {
     struct sockaddr_storage serverStorage;
     socklen_t addr_size;
     
-    
     /*---- Create the socket. The three arguments are: ----*/
     /* 1) Internet domain 2) Stream socket 3) Default protocol (TCP in this case) */
     welcomeSocket = socket(PF_INET, SOCK_STREAM, 0);
@@ -34,7 +33,7 @@ int connection(int* newSocket) {
     serverAddr.sin_family = AF_INET;
     
     /* Set port number, using htons function to use proper byte order */
-    serverAddr.sin_port = htons(1981);
+    serverAddr.sin_port = htons(1980);
     
     /* Set IP address to localhost */
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");

@@ -35,6 +35,7 @@ struct player {
     int lives;
     int winner;
     int ip_address;
+    int* socket;
 };
 
 

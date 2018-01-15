@@ -63,45 +63,84 @@ void *receive_(void *args)
     
     pthread_exit(NULL);
 }
+
 */
 
 
 
+void *host_(void *args)
+{
+    printf("\nNous sommes dans le thread host.\n");
+    
+    player* player1_ = args;
+    
+    initialiaze_tab(player1_->main_board);
+    initialiaze_tab(player1_->mark_board);
+    
+    //fill_main_board(player1_->main_board, 0, NULL);
+    
+    pthread_exit(NULL);
+}
+
+void *client_(void *args)
+{
+    printf("\nNous sommes dans le thread client.\n");
+    
+    player* player2_ = args;
+    
+    initialiaze_tab(player2_->main_board);
+    initialiaze_tab(player2_->mark_board);
+    
+    //fill_main_board(player2_->main_board, 1, player2_->socket);
+    
+    pthread_exit(NULL);
+}
+
+
 int main(void)
 {
-    pthread_t send, receive;
+    pthread_t host, client;
     
     printf("Avant la création des threads.\n");
     
     int socket;
     int* new_socket = &socket;
-
-
-    connection(new_socket);
     
     player* player1 = malloc(sizeof(player));
     player* player2 = malloc(sizeof(player));
-    
+    player2->socket = &socket;
+
     player1->name = malloc(10*sizeof(char));
     player2->name = malloc(10*sizeof(char));
     
+    player *args_1 = player1;
+    player *args_2 = player2;
     
-    get_names(player1->name, player2->name, new_socket);
+    connection(new_socket);
+    
+    if (pthread_create(&host, NULL, host_, args_1)) {
+        perror("pthread_create");
+        return EXIT_FAILURE;
+    }
+    
+    if (pthread_create(&client, NULL, client_, args_2)) {
+        perror("pthread_create");
+        return EXIT_FAILURE;
+    }
+    
+    if (pthread_join(host, NULL)) {
+        perror("pthread_join");
+        return EXIT_FAILURE;
+    }
+    
+    if (pthread_join(client, NULL)) {
+        perror("pthread_join");
+        return EXIT_FAILURE;
+    }
     
     printf("\nPlayer1 name : %s\n", player1->name);
     printf("\nPlayer2 name : %s\n", player2->name);
     
-    
-    initialiaze_tab(player1->main_board);
-    initialiaze_tab(player1->mark_board);
-    initialiaze_tab(player2->main_board);
-    initialiaze_tab(player2->mark_board);
-    
-    
-    //fill_main_board(player1->main_board, 0, NULL);
-    fill_main_board(player2->main_board, 1, new_socket);
-    
-    /*
     player1->main_board[0][0] = 'C';
     player1->main_board[0][1] = 'C';
     player1->main_board[0][2] = 'C';
@@ -112,39 +151,11 @@ int main(void)
     player2->main_board[0][1] = 'C';
     player2->main_board[0][2] = 'C';
     player2->main_board[0][3] = 'C';
-    player2->main_board[0][4] = 'C';*/
+    player2->main_board[0][4] = 'C';
     
-    //printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
+    printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
     
     play(player1, player2, new_socket);
-    
-    /*
-    int *args = &socket;
-    
-    if (pthread_create(&send, NULL, send_, args)) {
-        perror("pthread_create");
-        return EXIT_FAILURE;
-    }
-    
-    
-    if (pthread_create(&receive, NULL, receive_, args)) {
-        perror("pthread_create");
-        return EXIT_FAILURE;
-    }
-    
-    if (pthread_join(send, NULL)) {
-        perror("pthread_join");
-        return EXIT_FAILURE;
-    }
-    
-    
-    if (pthread_join(receive, NULL)) {
-        perror("pthread_join");
-        return EXIT_FAILURE;
-    }
-    
-    printf("Après la création des threads.\n");
-    */
      
     return EXIT_SUCCESS;
 }
@@ -152,12 +163,12 @@ int main(void)
 
 int play (player* player1, player* player2, int* socket) {
     
-    int alternance = 0;
+    int alternance = 0, end = 0;
     player1->lives = 5; //30;
     player2->lives = 5; //30;
     char to_be_send[1024] = "";
     
-    while (alternance < 10) {
+    while (end == 0) {
         if (alternance % 2 == 0) {
             display_boards(player1->main_board, player1->mark_board, player1->name);
             printf("\nNumber of lives : %d\n", player1->lives);
@@ -173,8 +184,27 @@ int play (player* player1, player* player2, int* socket) {
             sprintf(to_be_send + strlen(to_be_send),"\nNumber of lives : %d\n", player2->lives);
             shoot_location_request(player1->main_board, player2->mark_board, &player1->lives, to_be_send, socket);      //request is made inside this function
         }
+        if (player1->lives == 0 || player2->lives == 0) {
+            end = 1;
+        }
         alternance++;
     }
+    
+    if (player1->lives == 0) {
+        strcpy(to_be_send, "");
+        sprintf(to_be_send + strlen(to_be_send),"\nYou've won the Game! Congratulations!\n");
+        printf("\nYou've lost the game.\n");
+    } else {
+        strcpy(to_be_send, "");
+        sprintf(to_be_send + strlen(to_be_send),"\nYou've lost the game.\n");
+        printf("\nYou've won the Game! Congratulations!\n");
+    }
+    strcpy(to_be_send, "");
+    display_tab_to_be_send(player2->main_board, "Your Board :", 1, "", to_be_send);
+    display_tab_to_be_send(player1->main_board, "Opponent's Board :", 1, player2->name, to_be_send);
+    simple_display(to_be_send, socket);
+    display_tab(player2->main_board, "Opponent's Board", 1, player2->name);
+    display_tab(player1->main_board, "Your Board", 1, player2->name);
     
     return 0;
 }
