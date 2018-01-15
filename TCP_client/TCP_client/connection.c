@@ -73,7 +73,7 @@ int connection(int* clientSocket) {
     } while (connected == 1);
     
     if (connected == 0) {
-        printf("Connection successed.\n");
+        printf("Connection successed with an opponent.\n\n");
 
     } else {
         printf("Connection failed.\n");

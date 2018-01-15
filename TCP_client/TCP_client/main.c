@@ -60,6 +60,8 @@ void *receive_(void *args)
 
 int main(void)
 {
+    printf("Welcome!! Let's play Battleship.\n\n\n");
+    
     pthread_t send, receive;
     
     //printf("Avant la création des threads.\n");

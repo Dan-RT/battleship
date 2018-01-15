@@ -45,11 +45,15 @@ int connection(int* newSocket) {
     bind(welcomeSocket, (struct sockaddr *) &serverAddr, sizeof(serverAddr));
     
     /*---- Listen on the socket, with 5 max connection requests queued ----*/
-    if(listen(welcomeSocket,5)==0)
-        printf("Listening\n");
-    else
+    if(listen(welcomeSocket,5)==0) {
+        printf("We're finding you an opponent...\n\n");
+    } else {
         printf("Error\n");
+        exit(0);
+    }
     
+    
+
     /*---- Accept call creates a new socket for the incoming connection ----*/
     addr_size = sizeof serverStorage;
     *newSocket = accept(welcomeSocket, (struct sockaddr *) &serverStorage, &addr_size);

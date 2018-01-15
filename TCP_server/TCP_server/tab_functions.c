@@ -282,7 +282,7 @@ void display_tab_ship(ship ships[10]) {
 
 void display_tab_ship_request(ship ships[10], char* data) {
     int i = 0;
-    strcpy(data, "");
+    strcpy(data, "\n");
     for(i = 0; i < 10; i++) {
         sprintf(data + strlen(data),"Name : %c, Size : %d\n", ships[i].code, ships[i].size);
     }

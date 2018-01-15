@@ -22,76 +22,38 @@ int shoot_location (char board[10][10], char mark_board[10][10], int* lives);
 void display_boards(char board[10][10], char mark_board[10][10], char* name);
 int play (player* player1, player* player2, int* socket);
 
-
-/*
-void *send_(void *args)
-{
-    printf("\nNous sommes dans le thread send.\n");
-    
-    int* new_socket = args;
-    
-    int i = 0;
-    for (i = 0; i < 5; i++) {
-        printf("send\n");
-    }
-    
-    while (1) {
-        char* output = "\nVotre message : ";
-        char* input = malloc(1024*sizeof(char));
-        read_string(output, input, 1024);
-        send_message(*new_socket, input);
-    }
-    
-    pthread_exit(NULL);
-}
-
-void *receive_(void *args)
-{
-    printf("\nNous sommes dans le thread receive.\n");
-    
-    int* new_socket = args;
-    
-    int i = 0;
-    for (i = 0; i < 5; i++) {
-        printf("receive\n");
-    }
-    
-    while (1) {
-        printf("\nWaiting for a message...\n");
-        receive_message(*new_socket);
-    }
-    
-    pthread_exit(NULL);
-}
-
-*/
-
-
-
 void *host_(void *args)
 {
-    printf("\nNous sommes dans le thread host.\n");
-    
+    printf("Opponent found!\n");
     player* player1_ = args;
+    
+    get_name(player1_->name, NULL, 0, NULL);
     
     initialiaze_tab(player1_->main_board);
     initialiaze_tab(player1_->mark_board);
     
-    //fill_main_board(player1_->main_board, 0, NULL);
+    display_tab(player1_->main_board, "Your Board:\n", 1, "");
+    
+    fill_main_board(player1_->main_board, 0, NULL);
     
     pthread_exit(NULL);
 }
 
 void *client_(void *args)
 {
-    printf("\nNous sommes dans le thread client.\n");
-    
     player* player2_ = args;
+    char to_be_send[1024] = "";
+    
+    get_name(NULL, player2_->name, 1, player2_->socket);
     
     initialiaze_tab(player2_->main_board);
     initialiaze_tab(player2_->mark_board);
     
-    //fill_main_board(player2_->main_board, 1, player2_->socket);
+    strcpy(to_be_send, "");
+    display_tab_to_be_send(player2_->main_board, "Your Board :\n", 1, "", to_be_send);
+    simple_display(to_be_send, player2_->socket);
+    
+    fill_main_board(player2_->main_board, 1, player2_->socket);
     
     pthread_exit(NULL);
 }
@@ -99,9 +61,9 @@ void *client_(void *args)
 
 int main(void)
 {
-    pthread_t host, client;
+    printf("Welcome!! Let's play Battleship!\n\n");
     
-    printf("Avant la création des threads.\n");
+    pthread_t host, client;
     
     int socket;
     int* new_socket = &socket;
@@ -153,7 +115,7 @@ int main(void)
     player2->main_board[0][3] = 'C';
     player2->main_board[0][4] = 'C';
     
-    printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
+    //printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
     
     play(player1, player2, new_socket);
      
@@ -201,10 +163,10 @@ int play (player* player1, player* player2, int* socket) {
     }
     strcpy(to_be_send, "");
     display_tab_to_be_send(player2->main_board, "Your Board :", 1, "", to_be_send);
-    display_tab_to_be_send(player1->main_board, "Opponent's Board :", 1, player2->name, to_be_send);
+    display_tab_to_be_send(player1->main_board, "Opponent's Board :", 1, "", to_be_send);
     simple_display(to_be_send, socket);
-    display_tab(player2->main_board, "Opponent's Board", 1, player2->name);
-    display_tab(player1->main_board, "Your Board", 1, player2->name);
+    display_tab(player2->main_board, "Opponent's Board", 1, "");
+    display_tab(player1->main_board, "Your Board", 1, "");
     
     return 0;
 }
