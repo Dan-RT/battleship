@@ -153,12 +153,12 @@ int fill_tab(char tab[10][10], coordinates boat, char boat_type) {
                         tab[i][j] = boat_type;
                     }
                     return 0;
+                } else if(tab[i][j] == 'x') {
+                    //printf("fill_tab last else used");
+                    return 2;
                 } else if (tab[i][j] != 'X' && tab[i][j] != 'x') {
                     tab[i][j] = tolower(tab[i][j]);
                     return 1;
-                } else {
-                    printf("fill_tab last else used");
-                    return 0;
                 }
             }
         }

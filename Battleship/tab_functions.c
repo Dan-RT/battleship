@@ -101,8 +101,6 @@ int logical_location_validation (char tab[10][10], coordinates boat, int boat_si
     
     int i = 0, j = 0;
     
-    
-    
     if (depth != boat_size) {
         if (boat.x < 0 || boat.y < 0 || boat.x > 9 || boat.y > 9 ) {
             //Pour éviter qu'on autorise un bateau hors du tableau

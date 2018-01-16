@@ -66,13 +66,16 @@ int read_string (char* output, char* data, int size)
 
 int validation_fill (char tab[10][10], char input_location [3], coordinates* coor, char boat_type) {
     
+    //On checke si le patterne Char-Integer est bon
     if (validate_input_pattern(input_location)) {
+        
         
         coor->x = convert_ascii_to_table_index(input_location[0]);
         coor->y = input_location[1] - 48;
         
         printf("\nCoordinates : %d, %d.\n", coor->x, coor->y);
         
+        //On vérifie si on a le droit de poser le bateau ici
         if (validate_fill_location(tab, *coor, boat_type)) {
             return 1;
         } else {
@@ -111,8 +114,11 @@ int validate_fill_location (char tab[10][10], coordinates boat, char boat_type) 
         orientation[i] = 0;
     }
     
+    //On check si il y a pas déjà un bateau
     if (empty_location_validation(tab, boat)) {
+        
         for (i = 0; i < 4; i++) {
+            //On trouve toutes les directions possibles
             if (logical_location_validation(tab, boat, give_boat_size(boat_type), 0, i+1) == 0) {
                 //Comme on est sur du récursif ici on regarde si on est bien resté à 0 pour valider, et non pas 1 comme avant
                 orientation[i] = 1;

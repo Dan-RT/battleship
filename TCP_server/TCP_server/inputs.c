@@ -243,7 +243,7 @@ int validate_input_pattern(char input_location [3]) {
 int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
     
     char input[3];
-    int check = 0;
+    int check = 0, flag = -1;
     coordinates* coor = malloc(sizeof(coordinates));
     
     do {
@@ -251,13 +251,18 @@ int shoot_location (char board[10][10], char mark_board[10][10], int* lives) {
         check = validation_shoot(board, input, coor);
     } while (check == 0);
     
-    if (fill_tab(board, *coor, ' ')) {
+    flag = fill_tab(board, *coor, ' ');
+    printf("\nFLAG :%d\n\n", flag);
+    
+    if (flag == 1) {
         fill_tab(mark_board, *coor, 'x');
         printf("Hit\n\n");
         *lives = *lives - 1;
-    } else {
+    } else if (flag == 0) {
         fill_tab(mark_board, *coor, 'X');
         printf("Dans l'eau\n\n");
+    } else {
+        printf("Too bad, location already targetted\n\n");
     }
     
     return 0;
@@ -267,7 +272,7 @@ int shoot_location_request (char board[10][10], char mark_board[10][10], int* li
     
     //char input[3];
     char response[10];
-    int check = 0;
+    int check = 0, flag = -1;
     coordinates* coor = malloc(sizeof(coordinates));
     
     sprintf(to_be_send + strlen(to_be_send),"\nEnter coordinate to shoot : \n");
@@ -280,7 +285,10 @@ int shoot_location_request (char board[10][10], char mark_board[10][10], int* li
         } while (check == 0);
     }
     
-    if (fill_tab(board, *coor, ' ')) {
+    flag = fill_tab(board, *coor, ' ');
+    printf("\nFLAG :%d\n\n", flag);
+    
+    if (flag == 1) {
         fill_tab(mark_board, *coor, 'x');
         
         strcpy(to_be_send, "");     //erase string
@@ -288,11 +296,15 @@ int shoot_location_request (char board[10][10], char mark_board[10][10], int* li
         simple_display(to_be_send, socket);
         
         *lives = *lives - 1;
-    } else {
+    } else if (flag == 0) {
         fill_tab(mark_board, *coor, 'X');
         
         strcpy(to_be_send, "");     //erase string
         sprintf(to_be_send + strlen(to_be_send),"Dans l'eau\n\n");
+        simple_display(to_be_send, socket);
+    } else {
+        strcpy(to_be_send, "");     //erase string
+        sprintf(to_be_send + strlen(to_be_send),"Too bad, location already targetted\n\n");
         simple_display(to_be_send, socket);
     }
     

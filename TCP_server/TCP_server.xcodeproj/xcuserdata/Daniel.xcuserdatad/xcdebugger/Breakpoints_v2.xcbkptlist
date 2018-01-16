@@ -14,7 +14,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "304"
-            endingLineNumber = "304">
+            endingLineNumber = "304"
+            landmarkName = "shoot_location_request"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -29,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "266"
             endingLineNumber = "266"
-            landmarkName = "shoot_location_request"
+            landmarkName = "shoot_location"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

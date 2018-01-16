@@ -32,9 +32,10 @@ int main(int argc, const char * argv[]) {
     initialiaze_tab(player2->main_board);
     initialiaze_tab(player2->mark_board);
     
-    //fill_main_board(player1->main_board);
-    //fill_main_board(player2->main_board);
+    fill_main_board(player1->main_board);
+    fill_main_board(player2->main_board);
     
+    /*
     player1->main_board[0][0] = 'C';
     player1->main_board[0][1] = 'C';
     player1->main_board[0][2] = 'C';
@@ -46,7 +47,8 @@ int main(int argc, const char * argv[]) {
     player2->main_board[0][2] = 'C';
     player2->main_board[0][3] = 'C';
     player2->main_board[0][4] = 'C';
-    
+    */
+     
     printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
     get_names(player1->name, player2->name);
     play(player1, player2);
@@ -68,12 +70,10 @@ int play (player* player1, player* player2) {
             display_boards(player1->main_board, player1->mark_board, player1->name);
             printf("\nNumber of lives : %d\n", player1->lives);
             shoot_location(player2->main_board, player1->mark_board, &player2->lives);
-            //display_boards(player1->main_board, player1->mark_board, player1->name);
         } else {
             display_boards(player2->main_board, player2->mark_board, player2->name);
             printf("\nNumber of lives : %d\n", player2->lives);
             shoot_location(player1->main_board, player2->mark_board, &player1->lives);
-            //display_boards(player2->main_board, player2->mark_board, player2->name);
         }
         alternance++;
     }
@@ -94,13 +94,15 @@ int fill_main_board (char board[10][10]) {
     display_tab_ship(ships);
     
     for (i = 0; i < 10; i++) {
+        //on boucle sur chaque bateau
         do {
-            //permet de créer dans input une un string avec des variables dedans
+            //on demande les coordonnées du bateau
             snprintf(output, sizeof(output),
                      "\n\nEnter coordinate for a %s : \n",
                      give_boat_name(ships[i].code));
             read_string(output, input, 3);
             check = validation_fill(board, input, coor, *give_boat_name(ships[i].code));
+            //on vérifie si toutes les conditions sont remplies pour poser le bateau
         } while (check == 0);
         check = 0;
     }
@@ -110,7 +112,6 @@ int fill_main_board (char board[10][10]) {
 
 
 void get_names(char* name_1, char* name_2) {
-    
     read_string("\nEnter name Player 1 : ", name_1, 10);
     read_string("\nEnter name Player 2 : ", name_2, 10);
 }

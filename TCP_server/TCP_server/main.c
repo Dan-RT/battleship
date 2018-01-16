@@ -103,7 +103,7 @@ int main(void)
     printf("\nPlayer1 name : %s\n", player1->name);
     printf("\nPlayer2 name : %s\n", player2->name);
     
-    player1->main_board[0][0] = 'C';
+    /*player1->main_board[0][0] = 'C';
     player1->main_board[0][1] = 'C';
     player1->main_board[0][2] = 'C';
     player1->main_board[0][3] = 'C';
@@ -113,7 +113,7 @@ int main(void)
     player2->main_board[0][1] = 'C';
     player2->main_board[0][2] = 'C';
     player2->main_board[0][3] = 'C';
-    player2->main_board[0][4] = 'C';
+    player2->main_board[0][4] = 'C';*/
     
     //printf("\nFilling board has been disabled on the code. A carrier was set by default\n");
     
@@ -155,10 +155,12 @@ int play (player* player1, player* player2, int* socket) {
     if (player1->lives == 0) {
         strcpy(to_be_send, "");
         sprintf(to_be_send + strlen(to_be_send),"\nYou've won the Game! Congratulations!\n");
+        simple_display(to_be_send, socket);
         printf("\nYou've lost the game.\n");
     } else {
         strcpy(to_be_send, "");
         sprintf(to_be_send + strlen(to_be_send),"\nYou've lost the game.\n");
+        simple_display(to_be_send, socket);
         printf("\nYou've won the Game! Congratulations!\n");
     }
     strcpy(to_be_send, "");

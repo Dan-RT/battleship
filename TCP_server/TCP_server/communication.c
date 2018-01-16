@@ -33,7 +33,7 @@ int connection(int* newSocket) {
     serverAddr.sin_family = AF_INET;
     
     /* Set port number, using htons function to use proper byte order */
-    serverAddr.sin_port = htons(1980);
+    serverAddr.sin_port = htons(1981);
     
     /* Set IP address to localhost */
     serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
@@ -52,13 +52,10 @@ int connection(int* newSocket) {
         exit(0);
     }
     
-    
-
     /*---- Accept call creates a new socket for the incoming connection ----*/
     addr_size = sizeof serverStorage;
     *newSocket = accept(welcomeSocket, (struct sockaddr *) &serverStorage, &addr_size);
 
-    
     return 0;
 }
 
